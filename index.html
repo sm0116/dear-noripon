@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>動画視聴後にPDFを表示</title>
+    <style>
+        /* 最初はPDFエリアを非表示にする */
+        #pdfArea {
+            display: none;
+            margin-top: 20px;
+        }
+        video {
+            width: 100%;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>資料閲覧</h1>
+    <p>以下の動画を最後までご視聴ください。視聴完了後に資料（PDF）が表示されます。</p>
+
+    <!-- 動画プレイヤー -->
+    <video id="myVideo" controls>
+        <source src="封筒.mp4" type="video/mp4">
+        お使いのブラウザは動画タグをサポートしていません。
+    </video>
+
+    <!-- PDF表示エリア (最初は非表示) -->
+    <div id="pdfArea">
+        <h2>資料ダウンロードはこちら</h2>
+        <!-- PDFファイルへのリンク -->
+        <p><a href="your_document.pdf" target="_blank">PDF資料を開く（新しいタブで開きます）</a></p>
+        
+        <!-- または、PDFをページ内に埋め込む方法 -->
+        <!-- 
+        <embed src="履歴書.pdf" type="application/pdf" width="100%" height="500px" />
+        -->
+    </div>
+
+    <!-- JavaScriptコード -->
+    <script>
+        // 動画要素とPDFエリア要素を取得
+        const video = document.getElementById('myVideo');
+        const pdfArea = document.getElementById('pdfArea');
+
+        // 動画の再生終了イベントを監視
+        video.addEventListener('ended', (event) => {
+            // 動画が終了したらPDFエリアを表示する
+            pdfArea.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
