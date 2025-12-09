@@ -1,91 +1,100 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<style>
-  body {
-    background-color: #f5f5f5;
-   　font-family: "Noto Serif JP", serif;
-  }
-</style>
-</head>
-</body>
-<head>
-    <meta charset="UTF-8">
-    <title>のりぽんさんへ</title>
-    <style>
-        /* 最初はPDFエリアを非表示にする */
-        #pdfArea {
-            display: none;
-            margin-top: 20px;
-        }
-        video {
-            width: 100%;
-            max-width: 1000px;
-        }
-    </style>
-</head>
-<style>
-　body {
-    margin: 0;
-    font-family: sans-serif;
-  }
+  <meta charset="UTF-8" />
+  <title>のりぽんさんへ</title>
 
-  /* ▼ ヘッダー部分 ▼ */
-  header {
-    background-color: #666666;   /* ← ここでヘッダーの色を変える！ */
-    color: #ffffff;              /* ← 文字色 */
-    padding: 20px;
-    text-align: center;
-  }
+  <!-- Google Fonts（Noto Serif JP）を読み込む -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 
-  .title {
-    font-size: 28px;
-    font-weight: bold;
-  }
-</style>
+  <style>
+    /* 全体 */
+    body {
+      margin: 0;
+      background-color: #f5f5f5;
+      font-family: "Noto Serif JP", serif; /* Google Fonts を読み込んでいるので反映される */
+      color: #333333;
+      line-height: 1.6;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* ヘッダー */
+    header {
+      background-color: #666666;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+    }
+    .title {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    /* 動画・PDFエリア */
+    video {
+      width: 100%;
+      max-width: 1000px;
+      display: block;
+      margin: 20px auto;
+    }
+    #pdfArea {
+      display: none; /* 最初は非表示 */
+      margin-top: 20px;
+      max-width: 1000px;
+    }
+    #pdfArea h2 {
+      margin: 0 0 10px 0;
+    }
+    #pdfArea a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+  </style>
 </head>
+
 <body>
-
   <header>
     <div class="title">のりさん、ぽんさん へ</div>
   </header>
-<body> 
-    <p style="color:#333333;">
-    未経験なのですが、のりさん・ぽんさんと一緒に働きたくて応募してみました。<br>
-    ご検討のほど、よろしくお願いいたします！<br>
-    (動画の後、履歴書が表示されます)</p>
+
+  <main>
+    <p>
+      未経験なのですが、のりさん・ぽんさんと一緒に働きたくて応募してみました。<br>
+      ご検討のほど、よろしくお願いいたします！<br>
+      (動画の後、履歴書が表示されます)
+    </p>
+
     <!-- 動画プレイヤー -->
     <video id="myVideo" controls>
-        <source src="封筒.mp4" type="video/mp4">
-        お使いのブラウザは動画タグをサポートしていません。
+      <source src="封筒.mp4" type="video/mp4">
+      お使いのブラウザは動画タグをサポートしていません。
     </video>
 
-    <!-- PDF表示エリア (最初は非表示) -->
+    <!-- PDF表示エリア（最初は非表示） -->
     <div id="pdfArea">
-        <h2>↓履歴書</h2>
-        <!-- PDFファイルへのリンク -->
-        <p><a href="履歴書.pdf" target="_blank" style="color: white;">開く（新しいタブで開きます）</a></p>
-        <!-- または、PDFをページ内に埋め込む方法 -->
-        <!-- 
-        <embed src="履歴書.pdf" type="application/pdf" width="100%" height="500px" />
-        -->
-       
+      <h2>↓履歴書</h2>
+      <p><a href="履歴書.pdf" target="_blank" rel="noopener">開く（新しいタブで開きます）</a></p>
+      <!-- embed でページ内表示したい場合：
+      <embed src="履歴書.pdf" type="application/pdf" width="100%" height="500px" />
+      -->
     </div>
+  </main>
 
-    <!-- JavaScriptコード -->
-    <script>
-        // 動画要素とPDFエリア要素を取得
-        const video = document.getElementById('myVideo');
-        const pdfArea = document.getElementById('pdfArea');
+  <script>
+    // 動画終了でPDFを表示
+    const video = document.getElementById('myVideo');
+    const pdfArea = document.getElementById('pdfArea');
 
-        // 動画の再生終了イベントを監視
-        video.addEventListener('ended', (event) => {
-            // 動画が終了したらPDFエリアを表示する
-            pdfArea.style.display = 'block';
-        });
-    </script>
-
+    if (video && pdfArea) {
+      video.addEventListener('ended', () => {
+        pdfArea.style.display = 'block';
+        // スクロールしてPDF表示位置に移動したければ次の行のコメント解除
+        // pdfArea.scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  </script>
 </body>
 </html>
 
